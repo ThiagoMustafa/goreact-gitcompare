@@ -2,7 +2,14 @@ root = true
 
 [*]
 indent_style = space
+<<<<<<< HEAD
 indent_size = 2
 charset = utf-8
 trim_trailing_whitespace = true;
 insert_final_newline = true;
+=======
+indent_size = 4
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+>>>>>>> 51fc226462c0b9e7d8eb20ab4d6a179f4db8ec48
