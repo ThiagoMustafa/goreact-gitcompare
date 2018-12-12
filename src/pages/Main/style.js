@@ -31,7 +31,7 @@ export const Form = styled.form`
     color: #fff;
     border: 0;
     font-size: 20px;
-    font-waight: bold;
+    font-weight: bold;
     border-radius: 3px;
 
     &:hover {

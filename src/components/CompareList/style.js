@@ -50,6 +50,10 @@ export const Repository = styled.div`
         font-style: italic;
       }
 
+      i {
+        margin-right: 20px;
+      }
+
       &:nth-child(2n - 1) {
         background: #f5f5f5;
       }

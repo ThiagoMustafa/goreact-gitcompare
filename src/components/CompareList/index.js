@@ -13,18 +13,22 @@ const CompareList = ({ repositories }) => (
         </header>
         <ul>
           <li>
+            <i className="fa fa-star" />
             {repository.stargazers_count}
             <small> stars </small>
           </li>
           <li>
+            <i className="fa fa-code-fork" />
             {repository.forks_count}
             <small> forks </small>
           </li>
           <li>
+            <i className="fa fa-group" />
             {repository.open_issues_count}
             <small> issues </small>
           </li>
           <li>
+            <i className="fa fa-clock-o" />
             {repository.lastCommit}
             <small> last commit </small>
           </li>
