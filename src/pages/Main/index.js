@@ -9,6 +9,7 @@ import api from '../../services/api';
 
 class Main extends Component {
   state = {
+    repositoryError: false,
     repositoryInput: '',
     repositories: [],
   };
@@ -23,9 +24,10 @@ class Main extends Component {
       this.setState({
         repositoryInput: '',
         repositories: [...this.state.repositories, repository],
+        repositoryError: false,
       });
     } catch (err) {
-      console.log(err);
+      this.setState({ repositoryError: true });
     }
   };
 
@@ -33,7 +35,7 @@ class Main extends Component {
     return (
       <Container>
         <img src={logo} alt="Github compare" />
-        <Form onSubmit={this.handleAddRepository}>
+        <Form withError={this.state.repositoryError} onSubmit={this.handleAddRepository}>
           <input
             type="text"
             placeholder="usuário/repositório"
