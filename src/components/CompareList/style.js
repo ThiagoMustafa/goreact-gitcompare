@@ -59,4 +59,17 @@ export const Repository = styled.div`
       }
     }
   }
+
+  .buttons {
+    margin-top: auto;
+  }
+`;
+
+export const Button = styled.button`
+  width: 100%;
+  height: 30px;
+  border: 0;
+  background-color: ${props => (props.buttonType === 'update' ? '#67cc9c' : '#f18383')};
+  color: #fff;
+  font-weight: bold;
 `;

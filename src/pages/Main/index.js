@@ -15,6 +15,11 @@ class Main extends Component {
     repositories: [],
   };
 
+  componentWillMount() {
+    const savedRepositories = JSON.parse(localStorage.repositories);
+    if (savedRepositories) this.setState({ repositories: savedRepositories });
+  }
+
   handleAddRepository = async (e) => {
     e.preventDefault();
     this.setState({ loading: true });
@@ -23,11 +28,16 @@ class Main extends Component {
       const { data: repository } = await api.get(`/repos/${this.state.repositoryInput}`);
       repository.lastCommit = moment(repository.pushed_at).fromNow();
 
-      this.setState({
-        repositoryInput: '',
-        repositories: [...this.state.repositories, repository],
-        repositoryError: false,
-      });
+      this.setState(
+        {
+          repositoryInput: '',
+          repositories: [...this.state.repositories, repository],
+          repositoryError: false,
+        },
+        () => {
+          localStorage.repositories = JSON.stringify(this.state.repositories);
+        },
+      );
     } catch (err) {
       this.setState({ repositoryError: true });
     } finally {
