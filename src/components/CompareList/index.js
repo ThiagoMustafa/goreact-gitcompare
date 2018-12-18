@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Container, Repository, Button } from './style';
 
-const CompareList = ({ repositories, deleteRepository }) => (
+const CompareList = ({ repositories, removeRepository, updateRepository }) => (
   <Container>
     {repositories.map(repository => (
       <Repository key={repository.id}>
@@ -34,10 +34,18 @@ const CompareList = ({ repositories, deleteRepository }) => (
           </li>
         </ul>
         <div className="buttons">
-          <Button type="button" buttonType="update">
+          <Button
+            type="button"
+            styleButton="update"
+            onClick={() => updateRepository(repository.id)}
+          >
             Update
           </Button>
-          <Button type="button" buttonType="delete" onClick={deleteRepository}>
+          <Button
+            type="button"
+            styleButton="delete"
+            onClick={() => removeRepository(repository.id)}
+          >
             Delete
           </Button>
         </div>
@@ -61,6 +69,8 @@ CompareList.protoType = {
       pushed_at: PropTypes.number,
     }),
   ).isRequired,
+  removeRepository: PropTypes.func.isRequired,
+  updateRepository: PropTypes.func.isRequired,
 };
 
 export default CompareList;

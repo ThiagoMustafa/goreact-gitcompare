@@ -45,6 +45,38 @@ class Main extends Component {
     }
   };
 
+  handleRemoveRepository = (id) => {
+    const { repositories } = this.state;
+
+    const updateRepositories = repositories.filter(repository => repository.id !== id);
+
+    this.setState({ repositories: updateRepositories });
+
+    localStorage.repositories = JSON.stringify(updateRepositories);
+  };
+
+  handleUpdateRepository = async (id) => {
+    const { repositories } = this.state;
+
+    const repository = repositories.find(repository => repository.id === id);
+
+    try {
+      const { data } = await api.get(`/repos/${repository.full_name}`);
+
+      data.lastCommit = moment(data.pushed_at).fromNow();
+
+      this.setState({
+        repositoryError: false,
+        repositoryInput: '',
+        repositories: repositories.map(repo => (repo.id === data.id ? data : repo)),
+      });
+
+      localStorage.repositories = JSON.stringify(repositories);
+    } catch (err) {
+      this.setState({ repositoryError: true });
+    }
+  };
+
   render() {
     return (
       <Container>
@@ -61,7 +93,11 @@ class Main extends Component {
           </button>
         </Form>
 
-        <CompareList repositories={this.state.repositories} />
+        <CompareList
+          repositories={this.state.repositories}
+          removeRepository={this.handleRemoveRepository}
+          updateRepository={this.handleUpdateRepository}
+        />
       </Container>
     );
   }
